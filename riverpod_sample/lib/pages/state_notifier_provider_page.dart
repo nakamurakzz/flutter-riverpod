@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final helloProvider = Provider(((ref) => 'Hello World'));
+// StateNotifierのサブクラス
+class CounterNotifier extends StateNotifier<int> {
+  CounterNotifier() : super(0);
+
+  void increment() {
+    state++;
+  }
+}
+
+final counterNotifierProvider = StateNotifierProvider<CounterNotifier, int>(
+  (ref) => CounterNotifier(),
+);
 
 class StateNotifierProviderPage extends ConsumerWidget {
   String title = '';
@@ -10,12 +21,20 @@ class StateNotifierProviderPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final value = ref.watch(helloProvider);
+    // StateNotifierProviderのnotifierを使うと、StateNotifierのインスタンスを取得できる
+    final countStateController = ref.read(counterNotifierProvider.notifier);
+    final count = ref.watch(counterNotifierProvider);
+
     return Scaffold(
-      appBar: AppBar(title: const Text("Riverpod Sample")),
-      body: Center(
-        child: Text(value),
-      ),
-    );
+        appBar: AppBar(title: const Text("Riverpod Sample")),
+        body: Center(
+          child: Text(count.toString()),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            countStateController.increment();
+          },
+          child: const Icon(Icons.add),
+        ));
   }
 }
