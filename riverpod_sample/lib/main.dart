@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_sample/pages/future_stream_provider_page.dart';
 import 'package:riverpod_sample/pages/riverpod_page.dart';
 import 'package:riverpod_sample/pages/state_notifier_provider_page.dart';
 
@@ -23,6 +24,8 @@ class MyApp extends StatelessWidget {
         '/riverpod': (context) => RiverpodPage(title: 'Flutter Demo Home Page'),
         '/state-notifier-provider': (context) =>
             StateNotifierProviderPage(title: 'State Notifier Provider'),
+        '/future-provider': (context) =>
+            FutureProviderPage(title: 'Flutter Demo Home Page'),
       },
       initialRoute: '/',
     );
@@ -65,6 +68,19 @@ class HomePage extends StatelessWidget {
                 minimumSize: const Size(200, 50),
               ),
               child: const Text('State Notifier Provider'),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/future-provider');
+              },
+              style: ElevatedButton.styleFrom(
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                minimumSize: const Size(200, 50),
+              ),
+              child: const Text('Future Provider'),
             ),
           ],
         ),
