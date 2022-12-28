@@ -75,19 +75,6 @@ class HomePage extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/future-provider');
-              },
-              style: ElevatedButton.styleFrom(
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-                minimumSize: const Size(200, 50),
-              ),
-              child: const Text('Future Provider'),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
                 Navigator.pushNamed(context, '/state-provider');
               },
               style: ElevatedButton.styleFrom(
@@ -97,6 +84,19 @@ class HomePage extends StatelessWidget {
                 minimumSize: const Size(200, 50),
               ),
               child: const Text('State Provider'),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/future-provider');
+              },
+              style: ElevatedButton.styleFrom(
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                minimumSize: const Size(200, 50),
+              ),
+              child: const Text('Future Provider'),
             ),
           ],
         ),
