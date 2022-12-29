@@ -3,7 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // StateNotifierのサブクラス
 class CounterNotifier extends StateNotifier<int> {
-  CounterNotifier() : super(0);
+  CounterNotifier(this.ref) : super(0);
+  final Ref ref;
 
   void increment() {
     state++;
@@ -11,7 +12,8 @@ class CounterNotifier extends StateNotifier<int> {
 }
 
 final counterNotifierProvider = StateNotifierProvider<CounterNotifier, int>(
-  (ref) => CounterNotifier(),
+  // サブクラスのStateNotifierにrefを渡すことも出来る
+  (ref) => CounterNotifier(ref),
 );
 
 class StateNotifierProviderPage extends ConsumerWidget {
@@ -24,6 +26,10 @@ class StateNotifierProviderPage extends ConsumerWidget {
     // StateNotifierProviderのnotifierを使うと、StateNotifierのインスタンスを取得できる
     final countStateController = ref.read(counterNotifierProvider.notifier);
     final count = ref.watch(counterNotifierProvider);
+
+    ref.listen<int>(counterNotifierProvider, (int? value, int previous) {
+      print("value: $value, previous: $previous");
+    });
 
     return Scaffold(
         appBar: AppBar(title: const Text("Riverpod Sample")),

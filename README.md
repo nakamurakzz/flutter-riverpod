@@ -18,6 +18,21 @@ riverpodを完全に理解するためのリポジトリ
     - Futureを扱うときに使う
     - NativeのAPIやWeb API呼び出し等で使う
 
+- 状態の受け取り方
+  - ref.watch
+    - 状態の変更を監視する
+    - 状態の変更があった場合に再描画される
+  - ref.listen
+    - 状態の変更を監視する
+    - 状態の変更があった場合に自分で定義したコールバック関数を呼び出す
+    ```
+    ref.listen(counterNotifierProvider, (value, previous) {
+    print("value: $value, previous: $previous");
+    });
+    ```
+  - ref.read
+    - 状態の変更を監視しない
+
 - 外部からデータを入力する時は、Provider.familyを使う
   - Provider.family<レスポンスの型, パラメータの型>
 
